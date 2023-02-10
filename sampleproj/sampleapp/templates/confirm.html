@@ -1,0 +1,7 @@
+<form method="post">
+    {% csrf_token %}
+    <p>以下の内容で登録しますか？</p>
+    <p>画像: <img src="{{ image.col1.url }}" width="200"></p>
+    <input type="submit" name="action" value="登録">
+    <input type="submit" name="action" value="キャンセル">
+</form>
