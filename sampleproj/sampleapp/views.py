@@ -28,7 +28,9 @@ class MyCreateView(generic.CreateView):
     def form_invalid(self, form):
         # キャンセルボタンが押された時
         if self.request.POST.get('action') == 'キャンセル':
+            # 直前に入れたオブジェクトを取得
             image = MyModel.objects.last()
+            # ファイルを削除
             image.col1.delete()
             # DBからも削除
             image.delete()
