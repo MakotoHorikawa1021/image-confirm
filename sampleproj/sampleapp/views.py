@@ -7,10 +7,14 @@ import os
 from django.conf import settings
 
 class MyCreateView(generic.CreateView):
-    '''登録画面、登録確認画面用ビュー'''
-    model = MyModel
-    template_name = 'create.html'
-    form_class = forms.MyModelForm
+    '''
+    登録画面、登録確認画面用ビュー
+    登録処理の前にプレビュー画面を割り込ませるイメージ
+    '''
+
+    model = MyModel # モデルは画像だけのやつ
+    template_name = 'create.html' # 登録画面
+    form_class = forms.MyModelForm # 画像だけのフォーム
     success_url = reverse_lazy('sampleapp:create')
 
     def form_valid(self, form):
