@@ -28,15 +28,10 @@ class MyCreateView(generic.CreateView):
     def form_invalid(self, form):
         # キャンセルボタンが押された時
         if self.request.POST.get('action') == 'キャンセル':
-            os.remove( # ファイル削除
-                os.path.join( # 削除対象パスづくり（下２つをつなげる）
-                    settings.MEDIA_ROOT, # MEDIA_ROOTで設定したフォルダ
-                    str(MyModel.objects.last().col1 # 画像ファイル列の文字列
-                    )
-                )
-            )
+            image = MyModel.objects.last()
+            image.col1.delete()
             # DBからも削除
-            MyModel.objects.last().delete()
+            image.delete()
             # 終わったのでリダイレクト
             return redirect('sampleapp:create')
 
