@@ -26,7 +26,6 @@ class MyCreateView(generic.CreateView):
             # プレビューボタンが押されたので、プレビュー画面に画像を渡す
             return render(self.request, 'confirm.html', {'image':self.object})
         else:
-            # 登録ボタンが押された（プレビューでない、かつバリデーションOK）のでCreateViewのデフォルト処理
             return response
 
     def form_invalid(self, form):
@@ -40,7 +39,8 @@ class MyCreateView(generic.CreateView):
             image.delete()
             # 終わったのでリダイレクト
             return redirect('sampleapp:create')
+        elif self.request.POST.get('action') == '登録':
+            return redirect('sampleapp:create')
 
         # 普通にバリデーションNG
         return super().form_invalid(form)
-
